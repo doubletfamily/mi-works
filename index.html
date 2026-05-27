@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Works | HP制作・Excel・イラスト</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1a2e4a;
+      --navy-light: #2a4a72;
+      --gold: #f0a500;
+      --gold-dark: #d4900a;
+      --bg: #ffffff;
+      --bg-light: #f7f9fc;
+      --text: #333333;
+      --text-light: #666666;
+      --border: #e0e6ed;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      background: var(--bg);
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      background: var(--navy);
+      z-index: 100;
+      padding: 0 24px;
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo {
+      color: #fff;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+
+    .logo span { color: var(--gold); }
+
+    nav { display: flex; gap: 24px; align-items: center; }
+
+    nav a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--gold); }
+
+    .nav-cta {
+      background: var(--gold);
+      color: var(--navy) !important;
+      padding: 8px 18px;
+      border-radius: 24px;
+      font-weight: 700 !important;
+    }
+
+    .nav-cta:hover { background: var(--gold-dark); }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      color: #fff;
+      padding: 100px 24px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(240,165,0,0.15);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 16px;
+      border-radius: 20px;
+      margin-bottom: 28px;
+      letter-spacing: 0.1em;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 52px);
+      font-weight: 900;
+      line-height: 1.4;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 em {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    .hero p {
+      font-size: clamp(14px, 2vw, 18px);
+      opacity: 0.8;
+      max-width: 560px;
+      margin: 0 auto 40px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+      padding: 15px 36px;
+      border-radius: 36px;
+      font-weight: 700;
+      font-size: 16px;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.2s;
+      box-shadow: 0 4px 20px rgba(240,165,0,0.4);
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(240,165,0,0.5);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #fff;
+      padding: 15px 36px;
+      border-radius: 36px;
+      font-weight: 700;
+      font-size: 16px;
+      text-decoration: none;
+      display: inline-block;
+      border: 2px solid rgba(255,255,255,0.4);
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: #fff;
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* Sections */
+    section { padding: 88px 24px; }
+
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 900;
+      color: var(--navy);
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    .section-desc {
+      color: var(--text-light);
+      font-size: 15px;
+      max-width: 580px;
+      margin-bottom: 52px;
+      line-height: 1.8;
+    }
+
+    /* Services */
+    #services { background: var(--bg-light); }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .service-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 40px 32px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border-top: 4px solid var(--gold);
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+    }
+
+    .service-icon { font-size: 44px; margin-bottom: 20px; }
+
+    .service-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .service-card p {
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.8;
+    }
+
+    .service-tag {
+      display: inline-block;
+      background: var(--bg-light);
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 12px;
+      margin-top: 20px;
+    }
+
+    /* Why */
+    #why { background: var(--bg); }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 32px;
+    }
+
+    .feature-item { display: flex; gap: 16px; align-items: flex-start; }
+
+    .feature-num {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      background: var(--navy);
+      color: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 17px;
+    }
+
+    .feature-text h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .feature-text p {
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+
+    /* Pricing */
+    #pricing { background: var(--bg-light); }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      align-items: start;
+    }
+
+    .pricing-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 36px 28px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      border: 2px solid var(--border);
+    }
+
+    .pricing-card.featured {
+      border-color: var(--gold);
+      position: relative;
+      padding-top: 52px;
+    }
+
+    .featured-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 20px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .pricing-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .pricing-price {
+      font-size: 38px;
+      font-weight: 900;
+      color: var(--navy);
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+
+    .pricing-price span {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text-light);
+    }
+
+    .pricing-desc {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pricing-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .pricing-list li {
+      font-size: 14px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pricing-list li::before {
+      content: '✓';
+      color: var(--gold);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .pricing-list li.no::before {
+      content: '–';
+      color: #ccc;
+    }
+
+    .pricing-list li.no { color: var(--text-light); }
+
+    /* FAQ */
+    #faq { background: var(--bg); }
+
+    .faq-list { max-width: 720px; display: flex; flex-direction: column; gap: 12px; }
+
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .faq-q {
+      width: 100%;
+      background: #fff;
+      border: none;
+      padding: 20px 24px;
+      text-align: left;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      font-family: inherit;
+      transition: background 0.2s;
+    }
+
+    .faq-q:hover { background: var(--bg-light); }
+
+    .faq-icon {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      background: var(--gold);
+      color: var(--navy);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 16px;
+      transition: transform 0.2s;
+    }
+
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .faq-a p {
+      padding: 16px 24px 20px;
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.8;
+      background: var(--bg-light);
+    }
+
+    /* Contact */
+    #contact { background: var(--navy); }
+
+    #contact .section-label { color: var(--gold); }
+    #contact .section-title { color: #fff; }
+    #contact .section-desc { color: rgba(255,255,255,0.65); }
+
+    .contact-form {
+      max-width: 580px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+
+    .form-group label {
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.75);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 10px;
+      padding: 13px 16px;
+      color: #fff;
+      font-size: 15px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(255,255,255,0.35);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--gold);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 130px; }
+    .form-group select option { background: var(--navy); }
+
+    .btn-submit {
+      background: var(--gold);
+      color: var(--navy);
+      border: none;
+      padding: 15px 36px;
+      border-radius: 36px;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+      align-self: flex-start;
+      font-family: inherit;
+    }
+
+    .btn-submit:hover {
+      background: var(--gold-dark);
+      transform: translateY(-2px);
+    }
+
+    .form-note {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* Footer */
+    footer {
+      background: #0e1c2e;
+      color: rgba(255,255,255,0.45);
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 13px;
+    }
+
+    footer strong { color: rgba(255,255,255,0.8); }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      nav { display: none; }
+
+      nav.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background: var(--navy);
+        padding: 20px 24px;
+        gap: 18px;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        z-index: 99;
+      }
+
+      .hamburger { display: flex; }
+      header { position: relative; }
+      section { padding: 64px 20px; }
+      .hero { padding: 72px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">Mi <span>Works</span></a>
+    <nav id="nav">
+      <a href="#services">サービス</a>
+      <a href="#pricing">料金</a>
+      <a href="#faq">よくある質問</a>
+      <a href="#contact" class="nav-cta">お問い合わせ</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-badge">フリーランス制作サービス</div>
+  <h1>あなたのビジネスを、<br><em>ひと目で伝える</em>HPへ。</h1>
+  <p>Googleマップに載せたい。ネットで見つけてもらいたい。<br>そんなシンプルなご要望に、丁寧にお応えします。</p>
+  <div class="hero-buttons">
+    <a href="https://coconala.com" class="btn-primary">ココナラで依頼する</a>
+    <a href="#services" class="btn-secondary">サービスを見る</a>
+  </div>
+</section>
+
+<section id="services">
+  <div class="section-inner">
+    <div class="section-label">Services</div>
+    <h2 class="section-title">提供しているサービス</h2>
+    <p class="section-desc">HP制作からExcel、イラストまで。あなたのビジネスに必要な制作をまとめてお任せいただけます。</p>
+    <div class="service-grid">
+      <div class="service-card">
+        <div class="service-icon">🌐</div>
+        <h3>HP制作</h3>
+        <p>コードで丁寧に制作するため、表示が速く壊れにくいサイトを提供します。Googleマップの埋め込みや問い合わせフォームにも対応。スマホからも見やすい設計です。</p>
+        <span class="service-tag">¥15,000〜</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📊</div>
+        <h3>Excel・スプレッドシート</h3>
+        <p>業務効率化のための関数・マクロ作成、データ整理、管理フォーマットの作成など。面倒なExcel作業をお気軽にご相談ください。</p>
+        <span class="service-tag">ご相談ください</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎨</div>
+        <h3>イラスト作成</h3>
+        <p>SNS用アイコン、バナー、資料・HP用のイラストなど。用途とご予算に合わせてご提案します。</p>
+        <span class="service-tag">ご相談ください</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="section-inner">
+    <div class="section-label">Why Mi Works</div>
+    <h2 class="section-title">コードで作るHPの強み</h2>
+    <p class="section-desc">WordPressと違い、コードで制作するからこそのメリットがあります。</p>
+    <div class="feature-grid">
+      <div class="feature-item">
+        <div class="feature-num">1</div>
+        <div class="feature-text">
+          <h4>表示が速い</h4>
+          <p>余分なプラグインがないため、ページの読み込みが速く、訪問者が離脱しにくい。</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">2</div>
+        <div class="feature-text">
+          <h4>壊れにくい・安全</h4>
+          <p>WordPressのような定期的なアップデートやセキュリティリスクが少ない。</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">3</div>
+        <div class="feature-text">
+          <h4>維持費が安い</h4>
+          <p>無料プランで公開可能。月額の維持コストを大幅に抑えられます。</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">4</div>
+        <div class="feature-text">
+          <h4>スマホ完全対応</h4>
+          <p>スマホからのアクセスを最優先に設計。どの端末でも見やすいサイトを作ります。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="section-inner">
+    <div class="section-label">Pricing</div>
+    <h2 class="section-title">HP制作の料金プラン</h2>
+    <p class="section-desc">シンプルでわかりやすい料金設定。まずはベーシックプランからお気軽にどうぞ。</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3>ベーシック</h3>
+        <div class="pricing-price">¥15,000<span>〜</span></div>
+        <p class="pricing-desc">3ページ以内 / 納期7〜10日</p>
+        <ul class="pricing-list">
+          <li>最大3ページ</li>
+          <li>スマホ対応</li>
+          <li>Googleマップ埋め込み</li>
+          <li>Netlifyで公開</li>
+          <li class="no">問い合わせフォーム</li>
+          <li class="no">独自ドメイン設定</li>
+        </ul>
+      </div>
+      <div class="pricing-card featured">
+        <div class="featured-badge">人気No.1</div>
+        <h3>スタンダード</h3>
+        <div class="pricing-price">¥30,000<span>〜</span></div>
+        <p class="pricing-desc">5ページ以内 / 納期10〜14日</p>
+        <ul class="pricing-list">
+          <li>最大5ページ</li>
+          <li>スマホ対応</li>
+          <li>Googleマップ埋め込み</li>
+          <li>Netlifyで公開</li>
+          <li>問い合わせフォーム</li>
+          <li class="no">独自ドメイン設定</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <h3>プレミアム</h3>
+        <div class="pricing-price">¥60,000<span>〜</span></div>
+        <p class="pricing-desc">8ページ以内 / 納期14〜21日</p>
+        <ul class="pricing-list">
+          <li>最大8ページ</li>
+          <li>スマホ対応</li>
+          <li>Googleマップ埋め込み</li>
+          <li>Netlifyで公開</li>
+          <li>問い合わせフォーム</li>
+          <li>独自ドメイン設定サポート</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="section-inner">
+    <div class="section-label">FAQ</div>
+    <h2 class="section-title">よくある質問</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">WordPressと何が違うの？<div class="faq-icon">+</div></button>
+        <div class="faq-a"><p>WordPressはプラグインが多く便利な反面、表示が遅くなりやすく、定期的なアップデートが必要です。コードで作るサイトは軽くて速く、維持コストも低く抑えられます。</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">サーバーやドメインは自分で用意する必要がありますか？<div class="faq-icon">+</div></button>
+        <div class="faq-a"><p>ベーシック・スタンダードプランはNetlify（無料）で公開するため、サーバー契約は不要です。独自ドメイン（例：yourcompany.com）が必要な場合は別途取得していただきますが、取得方法をご案内します。</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">写真やテキストは用意する必要がありますか？<div class="faq-icon">+</div></button>
+        <div class="faq-a"><p>基本的にはご用意いただきます。ご用意が難しい場合は無料のフリー素材を使用する形でも対応可能です。お気軽にご相談ください。</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">納品後に自分でテキストを変更できますか？<div class="faq-icon">+</div></button>
+        <div class="faq-a"><p>HTMLファイルの編集が必要なため、ご自身での変更は難しい場合がほとんどです。変更が必要な際は別途お見積もりの上で対応いたします。</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Googleマップへの登録も代行してもらえますか？<div class="faq-icon">+</div></button>
+        <div class="faq-a"><p>Googleマップへの登録（Googleビジネスプロフィール）はご自身での申請が必要ですが、手順をご案内します。HPへのGoogleマップ埋め込みはプランに含まれています。</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">修正は何回までできますか？<div class="faq-icon">+</div></button>
+        <div class="faq-a"><p>デザインの修正は3回まで含まれています。それ以上の修正や仕様変更が発生した場合は、別途お見積もりとなります。ご要望はなるべく最初にまとめてお伝えいただくとスムーズです。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label">Contact</div>
+    <h2 class="section-title">お問い合わせ</h2>
+    <p class="section-desc">ご不明点やご相談はお気軽にどうぞ。2営業日以内にご返信します。</p>
+    <form class="contact-form" action="https://formspree.io/f/mlgvovpo" method="POST">
+      <div class="form-group">
+        <label>お名前 *</label>
+        <input type="text" name="name" placeholder="山田 太郎" required>
+      </div>
+      <div class="form-group">
+        <label>メールアドレス *</label>
+        <input type="email" name="email" placeholder="example@email.com" required>
+      </div>
+      <div class="form-group">
+        <label>ご相談内容</label>
+        <select name="service">
+          <option value="">選択してください</option>
+          <option value="hp">HP制作</option>
+          <option value="excel">Excel・スプレッドシート</option>
+          <option value="illustration">イラスト作成</option>
+          <option value="other">その他</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>メッセージ *</label>
+        <textarea name="message" placeholder="ご要望やご質問をお書きください" required></textarea>
+      </div>
+      <button type="submit" class="btn-submit">送信する</button>
+      <p class="form-note">※ 送信後、2営業日以内にご返信します。</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <p><strong>Mi Works</strong> &copy; 2025 All rights reserved.</p>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const nav = document.getElementById('nav');
+  hamburger.addEventListener('click', () => nav.classList.toggle('open'));
+
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const answer = item.querySelector('.faq-a');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-a').style.maxHeight = '0';
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
