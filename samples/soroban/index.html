@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>翼そろばん教室 | そろばんで、未来をつくる力を。</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Noto+Serif+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy:      #1a2e58;
+      --navy-dark: #131f3e;
+      --orange:    #e87420;
+      --cream:     #faf8f3;
+      --text:      #222;
+      --sub:       #666;
+      --border:    #e4ddd4;
+    }
+
+    /* フォント：Google Fontsが読めない場合もヒラギノで担保 */
+    body {
+      font-family: 'Noto Sans JP', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic UI', sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .serif {
+      font-family: 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', 'YuMincho', serif;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      position: sticky; top: 0; z-index: 300;
+      background: #fff;
+      border-bottom: 1px solid #eee;
+      box-shadow: 0 1px 8px rgba(0,0,0,.07);
+    }
+
+    .hd {
+      max-width: 1120px; margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+
+    /* そろばんアイコン */
+    .logo-mark {
+      width: 44px; height: 44px;
+      background: var(--navy);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 2px;
+      padding: 8px 6px;
+    }
+
+    .abacus-bar {
+      display: flex; gap: 3px; align-items: center;
+    }
+
+    .abacus-bar::before {
+      content: ''; display: block;
+      width: 100%; height: 1.5px;
+      background: rgba(200,160,80,.6);
+      position: absolute;
+    }
+
+    .bead {
+      width: 6px; height: 6px;
+      background: #c8a050;
+      border-radius: 2px;
+    }
+
+    .logo-text { display: flex; flex-direction: column; }
+    .logo-tag  { font-size: 9.5px; color: #999; letter-spacing: .05em; line-height: 1.3; }
+    .logo-name { font-size: 18px; font-weight: 700; color: var(--navy); letter-spacing: .03em; line-height: 1.2; }
+
+    nav { display: flex; align-items: center; gap: 0; }
+
+    nav a {
+      font-size: 13px; font-weight: 500;
+      color: #333; text-decoration: none;
+      padding: 8px 12px;
+      transition: color .18s;
+    }
+
+    nav a:hover, nav a.on { color: var(--orange); }
+
+    .nav-btn {
+      background: var(--navy); color: #fff !important;
+      padding: 8px 18px !important;
+      border-radius: 4px; margin-left: 8px;
+      font-weight: 700 !important;
+    }
+
+    .nav-btn:hover { background: #253668 !important; color: #fff !important; }
+
+    .hd-sp {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 4px;
+    }
+
+    .hd-sp span { display: block; width: 24px; height: 2px; background: var(--navy); border-radius: 2px; }
+
+    .sp-nav {
+      display: none; position: fixed;
+      top: 64px; left: 0; right: 0;
+      background: #fff; border-bottom: 1px solid #eee;
+      box-shadow: 0 8px 24px rgba(0,0,0,.1); z-index: 290;
+      flex-direction: column;
+    }
+
+    .sp-nav.open { display: flex; }
+    .sp-nav a { font-size: 15px; font-weight: 500; color: #333; text-decoration: none; padding: 15px 28px; border-bottom: 1px solid #f5f2ee; }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: var(--cream);
+      position: relative; overflow: hidden;
+      min-height: 570px;
+    }
+
+    /* 青海波パターン */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='55'%3E%3Cellipse cx='40' cy='55' rx='40' ry='28' fill='none' stroke='%231a2e58' stroke-width='1' stroke-opacity='.06'/%3E%3Cellipse cx='0' cy='55' rx='40' ry='28' fill='none' stroke='%231a2e58' stroke-width='1' stroke-opacity='.06'/%3E%3Cellipse cx='80' cy='55' rx='40' ry='28' fill='none' stroke='%231a2e58' stroke-width='1' stroke-opacity='.06'/%3E%3Cellipse cx='20' cy='27' rx='40' ry='28' fill='none' stroke='%231a2e58' stroke-width='1' stroke-opacity='.06'/%3E%3Cellipse cx='60' cy='27' rx='40' ry='28' fill='none' stroke='%231a2e58' stroke-width='1' stroke-opacity='.06'/%3E%3C/svg%3E");
+      background-size: 80px 55px;
+    }
+
+    .hero-in {
+      max-width: 1120px; margin: 0 auto;
+      padding: 64px 24px 80px;
+      display: flex; align-items: center; gap: 64px;
+      position: relative; z-index: 1;
+    }
+
+    .hero-txt { flex: 1; }
+
+    .hero-eyebrow {
+      font-size: 13px; color: var(--sub);
+      letter-spacing: .12em; margin-bottom: 16px;
+    }
+
+    .hero-h1 {
+      font-size: 52px; font-weight: 700;
+      line-height: 1.52; margin-bottom: 24px;
+      color: var(--navy);
+    }
+
+    .hero-h1 .or { color: var(--orange); }
+
+    .hero-lead {
+      font-size: 15px; color: var(--sub);
+      line-height: 1.95; margin-bottom: 36px;
+    }
+
+    .btn-org {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--orange); color: #fff;
+      font-size: 16px; font-weight: 700;
+      padding: 15px 36px; border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 6px 20px rgba(232,116,32,.36);
+      transition: all .22s;
+    }
+
+    .btn-org:hover { background: #ce6410; transform: translateY(-2px); box-shadow: 0 8px 26px rgba(232,116,32,.46); }
+
+    .btn-org .ar {
+      width: 25px; height: 25px;
+      background: rgba(255,255,255,.22); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px;
+    }
+
+    /* 右：写真エリア */
+    .hero-vis { flex: 1.1; position: relative; }
+
+    .hero-img {
+      width: 100%; height: 400px;
+      border-radius: 14px; overflow: hidden;
+      box-shadow: 0 14px 52px rgba(26,46,88,.18);
+    }
+
+    .hero-img img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      display: block;
+    }
+
+    /* 実績バッジ */
+    .badge {
+      position: absolute; bottom: -22px; right: 24px;
+      width: 116px; height: 116px;
+      background: var(--navy-dark);
+      border-radius: 50%;
+      border: 4px solid #c8a050;
+      box-shadow: 0 6px 28px rgba(0,0,0,.28);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; z-index: 2;
+    }
+
+    .badge .bt { font-size: 10px; color: rgba(255,255,255,.72); line-height: 1.4; }
+    .badge .bn { font-size: 30px; font-weight: 900; color: #c8a050; line-height: 1; }
+    .badge .bnu { font-size: 14px; font-weight: 700; color: #c8a050; }
+    .badge .bb { font-size: 10px; color: rgba(255,255,255,.65); margin-top: 2px; }
+    .badge-stars { display: flex; gap: 2px; margin-top: 3px; }
+    .badge-stars span { font-size: 9px; color: #c8a050; }
+
+    /* ===== NAV CARDS（コース案内エリア） ===== */
+    .nav-cards { background: var(--navy); }
+
+    .nc-grid {
+      max-width: 1120px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4,1fr);
+    }
+
+    .nc {
+      padding: 32px 26px;
+      text-decoration: none;
+      border-right: 1px solid rgba(255,255,255,.07);
+      display: flex; flex-direction: column; gap: 8px;
+      transition: background .2s;
+    }
+
+    .nc:last-child { border-right: none; }
+    .nc:hover { background: rgba(255,255,255,.05); }
+
+    .nc-icon { font-size: 32px; line-height: 1; }
+    .nc-ttl { font-size: 17px; font-weight: 700; color: #fff; margin-top: 4px; }
+    .nc.hl .nc-ttl { color: var(--orange); }
+    .nc-desc { font-size: 12.5px; color: rgba(255,255,255,.5); line-height: 1.65; }
+
+    .nc-arrow {
+      margin-top: 10px;
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,.22);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.6); font-size: 17px;
+      transition: all .2s;
+    }
+
+    .nc:hover .nc-arrow,
+    .nc.hl .nc-arrow { background: var(--orange); border-color: var(--orange); color: #fff; }
+
+    /* ===== セクション共通 ===== */
+    .sec { padding: 88px 24px; }
+    .sec.bg-c { background: var(--cream); }
+    .sec.bg-n { background: var(--navy); }
+
+    .wrap { max-width: 1120px; margin: 0 auto; }
+
+    .sec-hd { text-align: center; margin-bottom: 60px; }
+    .sec-hd.lft { text-align: left; }
+
+    .sec-en {
+      font-size: 12px; font-weight: 700;
+      color: var(--orange);
+      letter-spacing: .28em; text-transform: uppercase;
+      margin-bottom: 12px;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    .sec-ja {
+      font-size: 34px; font-weight: 700;
+      color: var(--navy); line-height: 1.55;
+    }
+
+    .bg-n .sec-ja { color: #fff; }
+
+    .sec-lead {
+      font-size: 15.5px; color: var(--sub);
+      margin-top: 14px; line-height: 1.9;
+    }
+
+    .bg-n .sec-lead { color: rgba(255,255,255,.58); }
+
+    .sec-line {
+      width: 42px; height: 3px;
+      background: var(--orange); border-radius: 2px;
+      margin: 18px auto 0;
+    }
+
+    .sec-hd.lft .sec-line { margin: 18px 0 0; }
+
+    /* ===== 4つの力 ===== */
+    .pow-grid {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 20px;
+    }
+
+    .pow-card {
+      background: #fff; border-radius: 12px;
+      padding: 36px 22px; text-align: center;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 10px rgba(0,0,0,.04);
+      transition: all .22s;
+    }
+
+    .pow-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,.09);
+      border-color: rgba(232,116,32,.22);
+    }
+
+    .pow-ic {
+      width: 64px; height: 64px;
+      background: linear-gradient(135deg, rgba(232,116,32,.14), rgba(232,116,32,.06));
+      border-radius: 50%;
+      font-size: 28px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 18px;
+    }
+
+    .pow-ttl { font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+    .pow-txt { font-size: 13.5px; color: var(--sub); line-height: 1.8; }
+
+    /* ===== ABOUT ===== */
+    .about-row { display: flex; gap: 68px; align-items: center; }
+
+    .about-img {
+      flex: 1; height: 390px;
+      border-radius: 14px; overflow: hidden;
+      box-shadow: 0 8px 36px rgba(26,46,88,.13);
+    }
+
+    .about-img img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+
+    .about-body { flex: 1; }
+
+    .about-txt {
+      font-size: 15.5px; color: var(--sub);
+      line-height: 1.95; margin-top: 24px; margin-bottom: 28px;
+    }
+
+    .chk-list { display: flex; flex-direction: column; gap: 13px; }
+
+    .chk {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 14.5px; font-weight: 500; color: var(--text);
+    }
+
+    .chk-dot {
+      width: 22px; height: 22px;
+      background: var(--orange); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 11px; flex-shrink: 0;
+    }
+
+    /* ===== コース・料金 ===== */
+    .course-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 24px;
+      align-items: start;
+    }
+
+    .course {
+      background: #fff; border-radius: 14px; overflow: hidden;
+      border: 1.5px solid var(--border);
+      box-shadow: 0 2px 10px rgba(0,0,0,.04);
+      transition: all .22s;
+    }
+
+    .course:hover { transform: translateY(-5px); box-shadow: 0 12px 36px rgba(0,0,0,.1); }
+
+    .course.pop { border-color: var(--orange); transform: scale(1.025); }
+    .course.pop:hover { transform: scale(1.025) translateY(-5px); }
+
+    .pop-tag {
+      background: var(--orange); color: #fff;
+      font-size: 12px; font-weight: 700;
+      text-align: center; padding: 6px 0;
+      letter-spacing: .08em;
+    }
+
+    .course-hd {
+      background: var(--navy); padding: 26px; text-align: center;
+    }
+
+    .course.pop .course-hd { background: var(--orange); }
+
+    .c-name { font-size: 19px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .c-age  { font-size: 13px; color: rgba(255,255,255,.68); }
+
+    .course-bd { padding: 28px 24px; }
+
+    .c-price {
+      text-align: center; margin-bottom: 22px;
+      padding-bottom: 20px; border-bottom: 1px solid #f0ece6;
+    }
+
+    .c-lbl { font-size: 12px; color: var(--sub); margin-bottom: 4px; }
+    .c-num { font-size: 36px; font-weight: 900; color: var(--navy); line-height: 1; }
+    .c-unit { font-size: 14px; color: var(--sub); }
+
+    .c-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 10px;
+      margin-bottom: 26px;
+    }
+
+    .c-list li {
+      font-size: 13.5px; color: var(--text);
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+
+    .c-list li::before { content: '✓'; color: var(--orange); font-weight: 700; flex-shrink: 0; }
+
+    .btn-out {
+      display: block; text-align: center;
+      border: 2px solid var(--navy); color: var(--navy);
+      font-size: 14px; font-weight: 700;
+      padding: 12px; border-radius: 8px;
+      text-decoration: none; transition: all .2s;
+    }
+
+    .btn-out:hover, .course.pop .btn-out {
+      background: var(--navy); color: #fff;
+    }
+
+    /* ===== 先生紹介 ===== */
+    .teacher-row { display: flex; gap: 60px; align-items: flex-start; }
+
+    .t-left { width: 260px; flex-shrink: 0; }
+
+    .t-photo {
+      width: 100%; height: 310px;
+      border-radius: 14px; overflow: hidden;
+      box-shadow: 0 8px 28px rgba(0,0,0,.1); margin-bottom: 16px;
+    }
+
+    .t-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top; display: block;
+    }
+
+    .t-name-box {
+      background: var(--navy); border-radius: 10px;
+      padding: 16px; text-align: center; color: #fff;
+    }
+
+    .t-name { font-size: 18px; font-weight: 700; }
+    .t-role { font-size: 12px; color: rgba(255,255,255,.62); margin-top: 4px; }
+
+    .t-right { flex: 1; padding-top: 8px; }
+
+    .t-quote {
+      font-size: 17px; font-weight: 700; color: var(--navy);
+      line-height: 1.7; padding: 20px 24px;
+      border-left: 4px solid var(--orange);
+      background: rgba(232,116,32,.05);
+      border-radius: 0 10px 10px 0; margin-bottom: 24px;
+    }
+
+    .t-desc { font-size: 15px; color: var(--sub); line-height: 1.95; margin-bottom: 28px; }
+
+    .cert-wrap { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .cert {
+      background: rgba(26,46,88,.07); color: var(--navy);
+      font-size: 12.5px; font-weight: 500;
+      padding: 6px 16px; border-radius: 20px;
+      border: 1px solid rgba(26,46,88,.12);
+    }
+
+    /* ===== アクセス ===== */
+    .access-row { display: flex; gap: 48px; align-items: stretch; }
+
+    .map-box {
+      flex: 1.1; min-height: 380px; border-radius: 14px;
+      background: #d8e8f4; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 12px; color: var(--navy);
+      border: 2px dashed rgba(26,46,88,.18);
+    }
+
+    .map-box .mi { font-size: 40px; opacity: .55; }
+    .map-box .mt { font-size: 14px; font-weight: 500; opacity: .65; }
+
+    .access-info { flex: 1; display: flex; flex-direction: column; gap: 22px; justify-content: center; }
+
+    .ai-row { display: flex; gap: 16px; align-items: flex-start; }
+
+    .ai-ic {
+      width: 46px; height: 46px; background: var(--navy);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+
+    .ai-body h4 { font-size: 11.5px; font-weight: 700; color: var(--orange); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 4px; }
+    .ai-body p  { font-size: 14.5px; color: var(--text); line-height: 1.65; }
+
+    .btn-map {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--navy); color: #fff;
+      font-size: 14px; font-weight: 700;
+      padding: 13px 24px; border-radius: 8px;
+      text-decoration: none; transition: all .2s;
+      width: fit-content; margin-top: 4px;
+    }
+
+    .btn-map:hover { background: #253668; }
+
+    /* ===== 体験バナー ===== */
+    .trial {
+      background: linear-gradient(130deg, #e87420 0%, #f5a030 100%);
+      padding: 68px 24px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+
+    .trial::before {
+      content: ''; position: absolute;
+      width: 420px; height: 420px; border-radius: 50%;
+      background: rgba(255,255,255,.07);
+      right: -80px; top: -80px;
+    }
+
+    .trial::after {
+      content: ''; position: absolute;
+      width: 300px; height: 300px; border-radius: 50%;
+      background: rgba(255,255,255,.05);
+      left: -60px; bottom: -90px;
+    }
+
+    .trial h2 {
+      font-size: 34px; font-weight: 700;
+      color: #fff; margin-bottom: 12px;
+      position: relative; z-index: 1;
+    }
+
+    .trial p {
+      font-size: 16px; color: rgba(255,255,255,.9);
+      margin-bottom: 36px; line-height: 1.75;
+      position: relative; z-index: 1;
+    }
+
+    .btn-wh {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: #fff; color: var(--orange);
+      font-size: 16px; font-weight: 700;
+      padding: 16px 46px; border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 6px 20px rgba(0,0,0,.14);
+      transition: all .22s;
+      position: relative; z-index: 1;
+    }
+
+    .btn-wh:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,.2); }
+
+    /* ===== お問い合わせ ===== */
+    .c-form {
+      max-width: 640px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 20px;
+    }
+
+    .fg { display: flex; flex-direction: column; gap: 8px; }
+
+    .fg label {
+      font-size: 13.5px; font-weight: 700;
+      color: rgba(255,255,255,.8);
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .rq {
+      background: var(--orange); color: #fff;
+      font-size: 10px; padding: 2px 8px; border-radius: 4px;
+    }
+
+    .fg input, .fg select, .fg textarea {
+      width: 100%; padding: 13px 16px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 8px; color: #fff;
+      font-size: 15px;
+      font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif;
+      transition: all .2s;
+    }
+
+    .fg input::placeholder, .fg textarea::placeholder { color: rgba(255,255,255,.3); }
+
+    .fg input:focus, .fg select:focus, .fg textarea:focus {
+      outline: none; border-color: var(--orange);
+      background: rgba(255,255,255,.12);
+    }
+
+    .fg select option { background: var(--navy-dark); }
+    .fg textarea { height: 130px; resize: vertical; }
+
+    .fg-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .btn-send {
+      background: var(--orange); color: #fff;
+      font-size: 16px; font-weight: 700;
+      padding: 17px; border: none; border-radius: 50px;
+      cursor: pointer; width: 100%;
+      font-family: 'Noto Sans JP', sans-serif;
+      box-shadow: 0 4px 18px rgba(232,116,32,.34);
+      transition: all .22s; margin-top: 4px;
+    }
+
+    .btn-send:hover { background: #ce6410; transform: translateY(-2px); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #0e1829;
+      color: rgba(255,255,255,.45);
+      padding: 56px 24px 28px;
+    }
+
+    .ft-in { max-width: 1120px; margin: 0 auto; }
+
+    .ft-top {
+      display: flex; justify-content: space-between; gap: 48px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      margin-bottom: 28px;
+    }
+
+    .ft-brand { max-width: 300px; }
+    .ft-brand .logo-name { color: #fff; }
+    .ft-brand .logo-tag { color: rgba(255,255,255,.32); }
+    .ft-brand p { font-size: 13.5px; line-height: 1.8; margin-top: 16px; color: rgba(255,255,255,.42); }
+
+    .ft-nav { display: flex; gap: 56px; }
+
+    .ft-nav h4 { font-size: 12px; font-weight: 700; color: rgba(255,255,255,.65); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 16px; }
+
+    .ft-nav ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+    .ft-nav a { text-decoration: none; color: rgba(255,255,255,.42); font-size: 13.5px; transition: color .2s; }
+    .ft-nav a:hover { color: rgba(255,255,255,.85); }
+
+    .ft-copy { text-align: center; font-size: 12px; color: rgba(255,255,255,.22); }
+
+    /* ===== SP対応 ===== */
+    @media (max-width: 960px) {
+      nav { display: none; }
+      .hd-sp { display: flex; }
+
+      .hero-in { flex-direction: column; padding: 44px 20px 64px; gap: 44px; }
+      .hero-h1 { font-size: 36px; }
+      .hero-img { height: 280px; }
+
+      .nc-grid { grid-template-columns: repeat(2,1fr); }
+      .nc { border-bottom: 1px solid rgba(255,255,255,.06); }
+
+      .pow-grid { grid-template-columns: repeat(2,1fr); }
+      .course-grid { grid-template-columns: 1fr; }
+      .course.pop { transform: none; }
+
+      .about-row, .teacher-row, .access-row { flex-direction: column; }
+      .t-left { width: 100%; }
+      .sec-ja { font-size: 26px; }
+      .ft-top { flex-direction: column; }
+      .ft-nav { flex-wrap: wrap; gap: 28px; }
+      .fg-row { grid-template-columns: 1fr; }
+      .trial h2 { font-size: 26px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-h1 { font-size: 30px; }
+      .pow-grid { gap: 12px; }
+      .sec { padding: 64px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="hd">
+    <a href="#" class="logo">
+      <div class="logo-mark">
+        <div class="abacus-bar"><div class="bead"></div><div class="bead"></div><div class="bead"></div><div class="bead"></div></div>
+        <div class="abacus-bar"><div class="bead"></div><div class="bead"></div><div class="bead"></div><div class="bead"></div></div>
+        <div class="abacus-bar"><div class="bead"></div><div class="bead"></div><div class="bead"></div><div class="bead"></div></div>
+      </div>
+      <div class="logo-text">
+        <span class="logo-tag">そろばんで、未来をつくる力を。</span>
+        <span class="logo-name">翼そろばん教室</span>
+      </div>
+    </a>
+    <nav>
+      <a href="#" class="on">ホーム</a>
+      <a href="#about">教室紹介</a>
+      <a href="#courses">コース・料金</a>
+      <a href="#teacher">先生紹介</a>
+      <a href="#access">アクセス</a>
+      <a href="#contact" class="nav-btn">お問い合わせ</a>
+    </nav>
+    <button class="hd-sp" onclick="document.getElementById('spnav').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div id="spnav" class="sp-nav">
+  <a href="#" onclick="this.closest('.sp-nav').classList.remove('open')">ホーム</a>
+  <a href="#about" onclick="this.closest('.sp-nav').classList.remove('open')">教室紹介</a>
+  <a href="#courses" onclick="this.closest('.sp-nav').classList.remove('open')">コース・料金</a>
+  <a href="#teacher" onclick="this.closest('.sp-nav').classList.remove('open')">先生紹介</a>
+  <a href="#access" onclick="this.closest('.sp-nav').classList.remove('open')">アクセス</a>
+  <a href="#contact" onclick="this.closest('.sp-nav').classList.remove('open')">お問い合わせ</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-in">
+    <div class="hero-txt">
+      <p class="hero-eyebrow">集中力・計算力・判断力を育てる</p>
+      <h1 class="hero-h1">
+        そろばんで<br>
+        <span class="or">伸ばす、考える力。</span><br>
+        一生の財産に。
+      </h1>
+      <p class="hero-lead">
+        伝統あるそろばん学習を、楽しく丁寧に。<br>
+        お子さまの「できた！」を、一緒に育てます。
+      </p>
+      <a href="#contact" class="btn-org">
+        無料体験レッスン受付中！
+        <span class="ar">›</span>
+      </a>
+    </div>
+    <div class="hero-vis">
+      <div class="hero-img">
+        <img
+          src="https://images.pexels.com/photos/8613089/pexels-photo-8613089.jpeg?auto=compress&cs=tinysrgb&w=700&h=420&fit=crop"
+          alt="そろばんを学ぶ子どもたち"
+          onerror="this.src='https://images.pexels.com/photos/8613093/pexels-photo-8613093.jpeg?auto=compress&cs=tinysrgb&w=700&h=420&fit=crop'"
+        >
+      </div>
+      <div class="badge">
+        <span class="bt">指導実績</span>
+        <span class="bn">20</span><span class="bnu">年</span>
+        <span class="bb">以上</span>
+        <div class="badge-stars"><span>★</span><span>★</span><span>★</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NAV CARDS -->
+<div class="nav-cards">
+  <div class="nc-grid">
+    <a href="#courses" class="nc">
+      <span class="nc-icon">🧮</span>
+      <span class="nc-ttl">コース案内</span>
+      <span class="nc-desc">目的やレベルに合わせた多彩なコースをご用意。</span>
+      <span class="nc-arrow">›</span>
+    </a>
+    <a href="#about" class="nc">
+      <span class="nc-icon">👥</span>
+      <span class="nc-ttl">教室紹介</span>
+      <span class="nc-desc">明るく集中できる環境と安心のサポート体制。</span>
+      <span class="nc-arrow">›</span>
+    </a>
+    <a href="#contact" class="nc hl">
+      <span class="nc-icon">✏️</span>
+      <span class="nc-ttl">無料体験レッスン</span>
+      <span class="nc-desc">そろばんの楽しさをぜひ実感してください！</span>
+      <span class="nc-arrow">›</span>
+    </a>
+    <a href="#access" class="nc">
+      <span class="nc-icon">📍</span>
+      <span class="nc-ttl">アクセス</span>
+      <span class="nc-desc">最寄り駅から徒歩5分の通いやすい立地です。</span>
+      <span class="nc-arrow">›</span>
+    </a>
+  </div>
+</div>
+
+<!-- 4つの力 -->
+<div class="sec bg-c">
+  <div class="wrap">
+    <div class="sec-hd">
+      <p class="sec-en">Why Soroban</p>
+      <h2 class="sec-ja">そろばんが育てる４つの力</h2>
+      <p class="sec-lead">楽しく学んで、未来につなぐ力を。<br>そろばん学習を通じて、確かな学力と自信を育てます。</p>
+      <div class="sec-line"></div>
+    </div>
+    <div class="pow-grid">
+      <div class="pow-card">
+        <div class="pow-ic">🎯</div>
+        <div class="pow-ttl">集中力</div>
+        <p class="pow-txt">長時間の計算に取り組むことで、自然と高い集中力が身につきます。</p>
+      </div>
+      <div class="pow-card">
+        <div class="pow-ic">🧮</div>
+        <div class="pow-ttl">計算力</div>
+        <p class="pow-txt">暗算・筆算の速さと正確さが飛躍的に向上し、数学の基礎が固まります。</p>
+      </div>
+      <div class="pow-card">
+        <div class="pow-ic">🧠</div>
+        <div class="pow-ttl">記憶力</div>
+        <p class="pow-txt">頭の中でそろばんをイメージする「暗算」が、記憶力・空間認識力を高めます。</p>
+      </div>
+      <div class="pow-card">
+        <div class="pow-ic">⚖️</div>
+        <div class="pow-ttl">判断力</div>
+        <p class="pow-txt">素早く正確に答えを出すトレーニングが、瞬時の判断力を養います。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div id="about" class="sec">
+  <div class="wrap">
+    <div class="about-row">
+      <div class="about-img">
+        <img
+          src="https://images.pexels.com/photos/8613093/pexels-photo-8613093.jpeg?auto=compress&cs=tinysrgb&w=700&h=390&fit=crop"
+          alt="明るい教室の様子"
+          onerror="this.src='https://images.pexels.com/photos/5905700/pexels-photo-5905700.jpeg?auto=compress&cs=tinysrgb&w=700&h=390&fit=crop'"
+        >
+      </div>
+      <div class="about-body">
+        <div class="sec-hd lft">
+          <p class="sec-en">About</p>
+          <h2 class="sec-ja">お子さまひとりひとりに<br>寄り添う教室</h2>
+          <div class="sec-line"></div>
+        </div>
+        <p class="about-txt">
+          翼そろばん教室は、地域のお子さまとともに20年以上歩んできました。<br>
+          単なる計算技術の習得だけでなく、集中力・忍耐力・自信など、
+          生涯を通じて役立つ「考える力」を育てることを大切にしています。
+        </p>
+        <div class="chk-list">
+          <div class="chk"><div class="chk-dot">✓</div><span>少人数制で一人ひとりの進度に合わせた指導</span></div>
+          <div class="chk"><div class="chk-dot">✓</div><span>明るく安心・安全な学習環境を完備</span></div>
+          <div class="chk"><div class="chk-dot">✓</div><span>全珠連・日商検定への対応・サポート</span></div>
+          <div class="chk"><div class="chk-dot">✓</div><span>保護者向け定期面談で進捗を丁寧にご共有</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- コース・料金 -->
+<div id="courses" class="sec bg-c">
+  <div class="wrap">
+    <div class="sec-hd">
+      <p class="sec-en">Courses &amp; Price</p>
+      <h2 class="sec-ja">コース・料金</h2>
+      <p class="sec-lead">お子さまの年齢・目標に合わせてお選びください。<br>まずは無料体験レッスンからどうぞ。</p>
+      <div class="sec-line"></div>
+    </div>
+    <div class="course-grid">
+      <div class="course">
+        <div class="course-hd">
+          <div class="c-name">ジュニアコース</div>
+          <div class="c-age">幼児〜小学校低学年向け</div>
+        </div>
+        <div class="course-bd">
+          <div class="c-price">
+            <div class="c-lbl">月謝</div>
+            <span class="c-num">¥4,500</span>
+            <span class="c-unit">〜 / 月</span>
+          </div>
+          <ul class="c-list">
+            <li>週1回・1時間のレッスン</li>
+            <li>そろばんの基礎から丁寧に指導</li>
+            <li>楽しく学べるゲーム形式も導入</li>
+            <li>無料体験レッスンあり</li>
+          </ul>
+          <a href="#contact" class="btn-out">無料体験を申込む</a>
+        </div>
+      </div>
+      <div class="course pop">
+        <div class="pop-tag">⭐ 人気No.1</div>
+        <div class="course-hd">
+          <div class="c-name">スタンダードコース</div>
+          <div class="c-age">小学生全学年向け</div>
+        </div>
+        <div class="course-bd">
+          <div class="c-price">
+            <div class="c-lbl">月謝</div>
+            <span class="c-num">¥6,000</span>
+            <span class="c-unit">〜 / 月</span>
+          </div>
+          <ul class="c-list">
+            <li>週2回・1時間のレッスン</li>
+            <li>検定対策・級位取得をサポート</li>
+            <li>暗算トレーニングを強化</li>
+            <li>保護者面談・進捗報告あり</li>
+          </ul>
+          <a href="#contact" class="btn-out">無料体験を申込む</a>
+        </div>
+      </div>
+      <div class="course">
+        <div class="course-hd">
+          <div class="c-name">上級・検定コース</div>
+          <div class="c-age">中学生・検定希望者向け</div>
+        </div>
+        <div class="course-bd">
+          <div class="c-price">
+            <div class="c-lbl">月謝</div>
+            <span class="c-num">¥8,000</span>
+            <span class="c-unit">〜 / 月</span>
+          </div>
+          <ul class="c-list">
+            <li>週2〜3回・選択制</li>
+            <li>全珠連・日商検定対策</li>
+            <li>段位取得をめざす本格指導</li>
+            <li>大会出場サポートあり</li>
+          </ul>
+          <a href="#contact" class="btn-out">無料体験を申込む</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 先生紹介 -->
+<div id="teacher" class="sec">
+  <div class="wrap">
+    <div class="sec-hd">
+      <p class="sec-en">Teacher</p>
+      <h2 class="sec-ja">先生紹介</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="teacher-row">
+      <div class="t-left">
+        <div class="t-photo">
+          <img
+            src="https://images.pexels.com/photos/8499541/pexels-photo-8499541.jpeg?auto=compress&cs=tinysrgb&w=400&h=480&fit=crop&crop=top"
+            alt="先生の写真"
+            onerror="this.src='https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg?auto=compress&cs=tinysrgb&w=400&h=480&fit=crop&crop=top'"
+          >
+        </div>
+        <div class="t-name-box">
+          <div class="t-name">山田　さくら</div>
+          <div class="t-role">教室長・主任講師</div>
+        </div>
+      </div>
+      <div class="t-right">
+        <p class="t-quote">
+          「できた！」の瞬間が、子どもの自信に変わる。<br>
+          その喜びをともに分かち合えることが、私の原動力です。
+        </p>
+        <p class="t-desc">
+          そろばんを始めたのは小学1年生のとき。段位取得をきっかけに
+          「子どもたちにこの楽しさを伝えたい」と思い、指導の道へ進みました。<br><br>
+          一人ひとりの個性に合わせた丁寧な指導を大切にしており、
+          「厳しいけど優しい先生」として地域の保護者から信頼をいただいています。
+          20年以上の指導経験で延べ500名以上の生徒を育ててきました。
+        </p>
+        <div class="cert-wrap">
+          <span class="cert">全珠連 段位取得</span>
+          <span class="cert">日商珠算能力検定 1級</span>
+          <span class="cert">指導歴20年以上</span>
+          <span class="cert">延べ500名以上指導</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- アクセス -->
+<div id="access" class="sec bg-c">
+  <div class="wrap">
+    <div class="sec-hd">
+      <p class="sec-en">Access</p>
+      <h2 class="sec-ja">アクセス</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="access-row">
+      <div class="map-box">
+        <span class="mi">🗺️</span>
+        <span class="mt">Googleマップ 埋め込みエリア</span>
+      </div>
+      <div class="access-info">
+        <div class="ai-row">
+          <div class="ai-ic">📍</div>
+          <div class="ai-body">
+            <h4>住所</h4>
+            <p>〒000-0000<br>○○県○○市○○町1-2-3<br>○○ビル 2F</p>
+          </div>
+        </div>
+        <div class="ai-row">
+          <div class="ai-ic">🚃</div>
+          <div class="ai-body">
+            <h4>アクセス</h4>
+            <p>○○線「○○駅」西口より徒歩5分</p>
+          </div>
+        </div>
+        <div class="ai-row">
+          <div class="ai-ic">🕐</div>
+          <div class="ai-body">
+            <h4>受付時間</h4>
+            <p>月〜金：15:00〜20:00<br>土：10:00〜17:00<br>日・祝：休み</p>
+          </div>
+        </div>
+        <div class="ai-row">
+          <div class="ai-ic">📞</div>
+          <div class="ai-body">
+            <h4>お電話</h4>
+            <p>000-000-0000</p>
+          </div>
+        </div>
+        <a href="#" class="btn-map">📍 Googleマップで開く</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 体験バナー -->
+<div class="trial">
+  <h2>まずは無料体験レッスンへ</h2>
+  <p>お子さまのペースで、楽しくそろばんを始めましょう。<br>ご予約はお気軽にどうぞ！</p>
+  <a href="#contact" class="btn-wh">無料体験レッスンを申込む ›</a>
+</div>
+
+<!-- お問い合わせ -->
+<div id="contact" class="sec bg-n">
+  <div class="wrap">
+    <div class="sec-hd">
+      <p class="sec-en">Contact</p>
+      <h2 class="sec-ja">お問い合わせ</h2>
+      <p class="sec-lead">無料体験レッスンのご予約・ご質問はこちらから。<br>お気軽にご連絡ください。</p>
+      <div class="sec-line"></div>
+    </div>
+    <form class="c-form">
+      <div class="fg-row">
+        <div class="fg">
+          <label>お名前 <span class="rq">必須</span></label>
+          <input type="text" placeholder="山田 花子">
+        </div>
+        <div class="fg">
+          <label>お子さまの学年</label>
+          <select>
+            <option value="">選択してください</option>
+            <option>幼児（年少〜年長）</option>
+            <option>小学1〜2年生</option>
+            <option>小学3〜4年生</option>
+            <option>小学5〜6年生</option>
+            <option>中学生</option>
+          </select>
+        </div>
+      </div>
+      <div class="fg">
+        <label>メールアドレス <span class="rq">必須</span></label>
+        <input type="email" placeholder="example@email.com">
+      </div>
+      <div class="fg">
+        <label>電話番号</label>
+        <input type="tel" placeholder="000-000-0000">
+      </div>
+      <div class="fg">
+        <label>お問い合わせ種別 <span class="rq">必須</span></label>
+        <select>
+          <option value="">選択してください</option>
+          <option>無料体験レッスンの申込み</option>
+          <option>コース・料金について</option>
+          <option>入室のご相談</option>
+          <option>その他</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>メッセージ</label>
+        <textarea placeholder="ご質問・ご要望をご自由にお書きください"></textarea>
+      </div>
+      <button type="submit" class="btn-send">送信する →</button>
+    </form>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-in">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <a href="#" class="logo">
+          <div class="logo-mark">
+            <div class="abacus-bar"><div class="bead"></div><div class="bead"></div><div class="bead"></div><div class="bead"></div></div>
+            <div class="abacus-bar"><div class="bead"></div><div class="bead"></div><div class="bead"></div><div class="bead"></div></div>
+            <div class="abacus-bar"><div class="bead"></div><div class="bead"></div><div class="bead"></div><div class="bead"></div></div>
+          </div>
+          <div class="logo-text">
+            <span class="logo-tag">そろばんで、未来をつくる力を。</span>
+            <span class="logo-name">翼そろばん教室</span>
+          </div>
+        </a>
+        <p>地域に根ざして20年以上。<br>お子さまの可能性を広げるそろばん教室です。</p>
+      </div>
+      <div class="ft-nav">
+        <div>
+          <h4>Menu</h4>
+          <ul>
+            <li><a href="#">ホーム</a></li>
+            <li><a href="#about">教室紹介</a></li>
+            <li><a href="#courses">コース・料金</a></li>
+            <li><a href="#teacher">先生紹介</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#access">アクセス</a></li>
+            <li><a href="#contact">お問い合わせ</a></li>
+            <li><a href="#">プライバシーポリシー</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="ft-copy">
+      <p>© 2024 翼そろばん教室. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
